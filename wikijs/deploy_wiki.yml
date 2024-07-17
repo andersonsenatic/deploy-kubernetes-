@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: wikijs
+  creationTimestamp: null
+  labels:
+    app: wikijs
+  name: wikijs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wikijs
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: wikijs
+    spec:
+      containers:
+      - image: ghcr.io/requarks/wiki:2.5
+        name: wiki
+        ports:
+        - containerPort: 3000
+        resources: {}
+        env:
+        - name: DB_TYPE
+          value: "mysql"
+        - name: DB_HOST
+          value: "192.168.188.168"
+        - name: DB_PORT
+          value: "3306"
+        - name: DB_USER
+          value: "wikijs"
+        - name: DB_PASS
+          value: "wikijs@123456"
+        - name: DB_NAME
+          value: "wikijs"
+
+status: {}
